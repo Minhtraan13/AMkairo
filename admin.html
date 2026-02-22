@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Admin - MKAIRO</title>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+<h2>ADMIN - ĐƠN HÀNG</h2>
+<div id="list"></div>
+
+<script>
+firebase.initializeApp({
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_DOMAIN",
+  projectId: "YOUR_PROJECT_ID"
+});
+const db = firebase.firestore();
+db.collection("orders").orderBy("time","desc")
+.onSnapshot(s=>{
+  list.innerHTML="";
+  s.forEach(d=>{
+    const o=d.data();
+    list.innerHTML+=`<div>
+      ${o.roblox} - ${o.package} - ${o.cardValue}
+    </div>`;
+  });
+});
+</script>
+</body>
+</html>
